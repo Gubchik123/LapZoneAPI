@@ -10,28 +10,36 @@ from . import serializers
 from .filters import ProductFilter
 
 
-class CarouselImageListAPIView(generics.ListAPIView):
+class _NoPaginationMixin:
+    """Mixin for disabling pagination."""
+
+    pagination_class = None
+
+
+class CarouselImageListAPIView(_NoPaginationMixin, generics.ListAPIView):
     """Generic list API view for getting all carousel images."""
 
     queryset = services.get_all_carousel_images()
     serializer_class = serializers.CarouselImageListSerializer
 
 
-class RecentlyAddedProductListAPIView(generics.ListAPIView):
+class RecentlyAddedProductListAPIView(
+    _NoPaginationMixin, generics.ListAPIView
+):
     """Generic list API view for getting recently added products."""
 
     queryset = services.get_recently_added_products(5)
     serializer_class = serializers.ProductListSerializer
 
 
-class BrandListAPIView(generics.ListAPIView):
+class BrandListAPIView(_NoPaginationMixin, generics.ListAPIView):
     """Generic list API view for getting all brands."""
 
     queryset = services.get_all_brands()
     serializer_class = serializers.BrandListSerializer
 
 
-class CategoryListAPIView(generics.ListAPIView):
+class CategoryListAPIView(_NoPaginationMixin, generics.ListAPIView):
     """Generic list API view for getting all categories."""
 
     queryset = services.get_all_categories()
