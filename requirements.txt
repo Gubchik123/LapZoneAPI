@@ -1,0 +1,13 @@
+Django==4.2.3
+djangorestframework==3.14.0
+django-ckeditor==6.5.1
+django-cors-headers==4.2.0
+django-filter==23.2
+django-rest-framework-social-oauth2==1.1.0
+djoser==2.2.0
+drf-social-oauth2==2.1.3
+drf-yasg==1.21.7
+Pillow==10.0.0
+psycopg2==2.9.6
+python-dotenv==1.0.0
+pytz==2023.3

@@ -1,0 +1,13 @@
+# Compiled bytecode files
+__pycache__/
+*.pyc
+*.pyo
+
+# Local development files
+venv/
+.vscode/
+*.env
+
+static/
+
+templates/swagger-ui.html
