@@ -6,9 +6,9 @@ from rest_framework.permissions import AllowAny
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="DRF Movie",
+        title="LapZone API",
         default_version="v1",
-        description="API for the DjangoMovie",
+        description="API for the Internet shop LapZone",
         license=openapi.License(name="BSD License"),
     ),
     public=True,
