@@ -38,7 +38,12 @@ To get started with the project, follow these steps:
     pip install -r requirements.txt
     ```
 
-4. Run the development server:
+4. Apply migrations:
+    ```
+    python manage.py migrate
+    ```
+
+5. Run the development server:
     ```
     python manage.py runserver
     ```
