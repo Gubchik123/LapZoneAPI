@@ -9,5 +9,6 @@ venv/
 *.env
 
 static/
+media/
 
 templates/swagger-ui.html
