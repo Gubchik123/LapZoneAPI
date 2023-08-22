@@ -23,7 +23,7 @@ class _NameAndSlugSerializer(serializers.ModelSerializer):
     class Meta:
         """Meta options for the _NameAndSlugSerializer."""
 
-        fields = ("name", "slug")
+        fields = ("id", "name", "slug")
 
 
 class BrandListSerializer(serializers.ModelSerializer):
@@ -51,7 +51,7 @@ class ProductListSerializer(serializers.ModelSerializer):
         """Meta options for the ProductListSerializer."""
 
         model = models.Product
-        fields = ("name", "slug", "price", "image")
+        fields = ("id", "name", "slug", "price", "year", "image")
 
 
 class _RecursiveSerializer(serializers.Serializer):
@@ -115,7 +115,7 @@ class ProductReviewCreateSerializer(serializers.ModelSerializer):
         """Meta options for the ProductReviewCreateSerializer."""
 
         model = models.Review
-        fields = ("name", "body", "parent", "product")
+        fields = ("name", "body", "parent", "product", "created")
 
 
 class ProductLikeSerializer(serializers.ModelSerializer):
