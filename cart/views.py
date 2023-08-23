@@ -4,7 +4,6 @@ from rest_framework.response import Response
 
 from .cart import Cart
 from . import services
-from shop.serializers import ProductListSerializer
 
 
 class CartAPIView(APIView):
@@ -12,11 +11,7 @@ class CartAPIView(APIView):
 
     def get(self, request: Request) -> Response:
         """Returns all the cart products."""
-        cart_items = []
-        for item in Cart(request.session):
-            item["product"] = ProductListSerializer(item["product"]).data
-            cart_items.append(item)
-        return Response(cart_items)
+        return Response(list(Cart(request.session)))
 
     def post(self, request: Request) -> Response:
         """Adds a product to cart and returns a response."""

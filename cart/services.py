@@ -36,14 +36,11 @@ def _process_cart_product(request: HttpRequest, action: str) -> dict[str, str]:
         return {"detail": product_id}  # product_id is an error message
 
     product = get_object_or_404(Product, id=product_id)
-    if action == "adding":
-        cart = Cart(request.session)
-        cart.add(product, quantity)
-        print(cart.cart)
-        return {"detail": "Product has successfully added to your cart."}
-
-    Cart(request.session).update(product, quantity)
-    return {"detail": "Product has successfully updated in your cart."}
+    cart = Cart(request.session)
+    cart.add(product, quantity) if action == "adding" else cart.update(
+        product_id, quantity
+    )
+    return list(cart)
 
 
 def add_product_to_cart_and_get_response(
@@ -70,5 +67,7 @@ def remove_product_from_cart_and_get_response(
     except (KeyError, ValueError, TypeError):
         logger.error(f"cart product removing: {product_id=}")
         return {"detail": settings.ERROR_MESSAGE}
-    Cart(request.session).remove(get_object_or_404(Product, id=product_id))
-    return {"detail": "Product has successfully removed from your cart."}
+    get_object_or_404(Product, id=product_id)
+    cart = Cart(request.session)
+    cart.remove(product_id)
+    return list(cart)
