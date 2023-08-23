@@ -33,15 +33,17 @@ def _process_cart_product(request: HttpRequest, action: str) -> dict[str, str]:
         request.data, prefix=action
     )
     if isinstance(product_id, str):
-        return {"message": product_id}  # product_id is an error message
+        return {"detail": product_id}  # product_id is an error message
 
     product = get_object_or_404(Product, id=product_id)
     if action == "adding":
-        Cart(request.session).add(product, quantity)
-        return {"message": "Product has successfully added to your cart."}
+        cart = Cart(request.session)
+        cart.add(product, quantity)
+        print(cart.cart)
+        return {"detail": "Product has successfully added to your cart."}
 
     Cart(request.session).update(product, quantity)
-    return {"message": "Product has successfully updated in your cart."}
+    return {"detail": "Product has successfully updated in your cart."}
 
 
 def add_product_to_cart_and_get_response(
@@ -67,6 +69,6 @@ def remove_product_from_cart_and_get_response(
         product_id = int(request.data["product_id"])
     except (KeyError, ValueError, TypeError):
         logger.error(f"cart product removing: {product_id=}")
-        return {"message": settings.ERROR_MESSAGE}
+        return {"detail": settings.ERROR_MESSAGE}
     Cart(request.session).remove(get_object_or_404(Product, id=product_id))
-    return {"message": "Product has successfully removed from your cart."}
+    return {"detail": "Product has successfully removed from your cart."}
